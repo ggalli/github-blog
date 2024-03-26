@@ -12,4 +12,4 @@ export const theme = {
   'primary-50': '#E7EDF4',
 
   secondary: '#3294F8',
-}
+} as const
