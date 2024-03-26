@@ -8,11 +8,11 @@ export const HeaderContainer = styled.div`
   background-size: cover;
 
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+`
 
-  img {
-    position: relative;
-    top: 64px;
-  }
+export const Logo = styled.img`
+  position: relative;
+  top: 64px;
 `
