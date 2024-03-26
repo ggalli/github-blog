@@ -21,10 +21,13 @@ export const Avatar = styled.img`
 export const ProfileContent = styled.div`
   display: flex;
   flex-direction: column;
+`
 
-  > h2 {
-    margin-bottom: 8px;
-  }
+export const ProfileTitle = styled.h2`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
 `
 
 export const ProfileInfo = styled.div`
