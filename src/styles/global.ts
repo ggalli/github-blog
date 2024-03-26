@@ -16,4 +16,19 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     font: 400 1rem Nunito, sans-serif;
   }
+
+  h2 {
+    line-height: 130%;
+    font-style: 24px;
+  }
+
+  h3 {
+    line-height: 160%;
+    font-style: 20px;
+  }
+
+  h4 {
+    line-height: 160%;
+    font-style: 18px;
+  }
 `
