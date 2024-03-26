@@ -9,7 +9,7 @@ export const ProfileCard = styled.div`
   box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.2);
 
   position: relative;
-  top: 110px;
+  top: -88px;
 `
 
 export const Avatar = styled.img`
