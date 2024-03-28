@@ -25,16 +25,16 @@ export const GlobalStyle = createGlobalStyle`
 
   h2 {
     line-height: 130%;
-    font-style: 24px;
+    font-size: 24px;
   }
 
   h3 {
     line-height: 160%;
-    font-style: 20px;
+    font-size: 20px;
   }
 
   h4 {
     line-height: 160%;
-    font-style: 18px;
+    font-size: 18px;
   }
 `
