@@ -1,10 +1,15 @@
 import { styled } from 'styled-components'
 
 export const PostsContainer = styled.div`
-  margin-top: -16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
 `
 
-export const PostsHeader = styled.div`
+export const PostsSearchField = styled.div`
+  margin-top: -16px;
+  margin-bottom: 48px;
+
   > h2 {
     display: flex;
     justify-content: space-between;
