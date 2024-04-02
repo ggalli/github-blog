@@ -40,7 +40,7 @@ export const ProfileInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-    color: ${({ theme }) => theme['primary-100']};
+    color: ${({ theme }) => theme['primary-300']};
 
     & svg {
       width: 18px;
