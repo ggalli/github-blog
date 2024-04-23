@@ -8,6 +8,7 @@ export const Link = styled.a`
 
   color: ${({ theme }) => theme.secondary};
   text-transform: uppercase;
+  text-decoration: none;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
