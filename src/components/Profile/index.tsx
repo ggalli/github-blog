@@ -12,40 +12,58 @@ import { Building } from '../icons/Building'
 import { UserGroup } from '../icons/UserGroup'
 import { Link } from '../Link'
 import { ArrowUpRightSquare } from '../icons/ArrowUpRightSquare'
+import { useFetch } from '../../hooks/use-fetch'
+
+interface UserResponse {
+  name: string
+  avatar_url: string
+  bio: string
+  followers: string
+  company?: string
+  login: string
+  id: string
+  html_url: string
+}
 
 export function Profile() {
+  const { data, error, isLoading } = useFetch<UserResponse>('/user/1')
+
+  if (error) {
+    return <ProfileCard>Falha ao carregar usuário</ProfileCard>
+  }
+
+  if (isLoading) {
+    return <ProfileCard style={{ height: 212 }}>Loading...</ProfileCard>
+  }
+
   return (
     <ProfileCard>
-      <Avatar src="https://picsum.photos/148" />
+      <Avatar src={data?.avatar_url} />
 
       <ProfileContent>
         <ProfileTitle>
-          Cameron Williamson
-          <Link>
+          {data?.name}
+          <Link href={data?.html_url} target="_blank">
             Github <ArrowUpRightSquare />{' '}
           </Link>
         </ProfileTitle>
 
-        <Text>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </Text>
+        <Text>{data?.bio}</Text>
 
         <ProfileInfo>
           <div>
             <Github />
-            cameronwll
+            {data?.login}
           </div>
 
           <div>
             <Building />
-            Rocketseat
+            {data?.company || '--'}
           </div>
 
           <div>
             <UserGroup />
-            32 seguidores
+            {data?.followers} seguidores
           </div>
         </ProfileInfo>
       </ProfileContent>
