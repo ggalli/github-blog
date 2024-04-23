@@ -21,6 +21,7 @@ export const Avatar = styled.img`
 export const ProfileContent = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
 `
 
 export const ProfileTitle = styled.h2`
