@@ -26,7 +26,7 @@ interface UserResponse {
 }
 
 export function Profile() {
-  const { data, error, isLoading } = useFetch<UserResponse>('/user/1')
+  const { data, error, isLoading } = useFetch<UserResponse>('/users/ggalli')
 
   if (error) {
     return <ProfileCard>Falha ao carregar usuário</ProfileCard>
@@ -37,36 +37,38 @@ export function Profile() {
   }
 
   return (
-    <ProfileCard>
-      <Avatar src={data?.avatar_url} />
+    data && (
+      <ProfileCard>
+        <Avatar src={data.avatar_url} />
 
-      <ProfileContent>
-        <ProfileTitle>
-          {data?.name}
-          <Link href={data?.html_url} target="_blank">
-            Github <ArrowUpRightSquare />{' '}
-          </Link>
-        </ProfileTitle>
+        <ProfileContent>
+          <ProfileTitle>
+            {data.name}
+            <Link to={data.html_url} target="_blank">
+              Github <ArrowUpRightSquare />{' '}
+            </Link>
+          </ProfileTitle>
 
-        <Text>{data?.bio}</Text>
+          <Text>{data.bio}</Text>
 
-        <ProfileInfo>
-          <div>
-            <Github />
-            {data?.login}
-          </div>
+          <ProfileInfo>
+            <div>
+              <Github />
+              {data.login}
+            </div>
 
-          <div>
-            <Building />
-            {data?.company || '--'}
-          </div>
+            <div>
+              <Building />
+              {data.company || '--'}
+            </div>
 
-          <div>
-            <UserGroup />
-            {data?.followers} seguidores
-          </div>
-        </ProfileInfo>
-      </ProfileContent>
-    </ProfileCard>
+            <div>
+              <UserGroup />
+              {data.followers} seguidores
+            </div>
+          </ProfileInfo>
+        </ProfileContent>
+      </ProfileCard>
+    )
   )
 }
