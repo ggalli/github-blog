@@ -11,36 +11,43 @@ import { ArrowUpRightSquare } from '../icons/ArrowUpRightSquare'
 import { ArrowLeft } from '../icons/ArrowLeft'
 import { Calendar } from '../icons/Calendar'
 import { Comment } from '../icons/Comment'
+import { Post } from '../../@types/post'
+import dayjs from '../../lib/dayjs'
 
-export function PostHeader() {
+interface PostHeaderProps {
+  data: Post
+}
+
+export function PostHeader({ data }: PostHeaderProps) {
   return (
     <Container>
       <LinksWrapper>
-        <Link>
+        <Link to="..">
           <ArrowLeft /> Voltar
         </Link>
 
-        <Link>
+        <Link to={data.html_url} target="_blank">
           ver no github <ArrowUpRightSquare />
         </Link>
       </LinksWrapper>
 
       <ProfileContent>
-        <PostTitle>JavaScript data types and data structures</PostTitle>
+        <PostTitle>{data.title}</PostTitle>
 
         <PostInfo>
           <div>
             <Github />
-            cameronwll
+            {data.user.login}
           </div>
 
           <div>
             <Calendar />
-            Há 1 dia
+            {dayjs(data.created_at).fromNow()}
           </div>
 
           <div>
-            <Comment />5 comentários
+            <Comment />
+            {data.comments} comentários
           </div>
         </PostInfo>
       </ProfileContent>
