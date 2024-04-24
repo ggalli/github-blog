@@ -1,20 +1,21 @@
 import { PostCardContainer } from './styles'
 import { Text } from '../Text'
+import dayjs from '../../lib/dayjs'
 
 interface PostCardProps {
-  created_at: string
+  createdAt: string
   title: string
-  number: string
+  number: number
   text: string
 }
 
-export function PostCard({ title, text, number }: PostCardProps) {
+export function PostCard({ title, text, number, createdAt }: PostCardProps) {
   return (
     <PostCardContainer to={`/posts/${number}`}>
       <h3>
         {title}
         <Text size="sm" as="span">
-          Há 1 dia
+          {dayjs(createdAt).fromNow()}
         </Text>
       </h3>
 
