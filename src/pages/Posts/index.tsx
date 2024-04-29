@@ -34,7 +34,7 @@ export function PostsPage() {
               <PostCard
                 key={item.id}
                 title={item.title}
-                text={item.body}
+                text={removeSpecialChars(item.body)}
                 number={item.number}
                 createdAt={item.created_at}
               />
@@ -44,4 +44,9 @@ export function PostsPage() {
       )}
     </Layout>
   )
+}
+
+function removeSpecialChars(string: string) {
+  const regex = /[@#$%&*{}|]/g
+  return string.replace(regex, '')
 }
