@@ -6,7 +6,7 @@ export const PostsContainer = styled.div`
   gap: 32px;
 `
 
-export const PostsSearchField = styled.div`
+export const PostsSearchField = styled.form`
   margin-top: -16px;
   margin-bottom: 48px;
 
