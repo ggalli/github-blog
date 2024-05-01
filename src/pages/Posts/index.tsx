@@ -7,6 +7,8 @@ import { Profile } from '../../components/Profile'
 import { useFetch } from '../../hooks/use-fetch'
 import { PostsContainer, PostsSearchField } from './styles'
 import { FormEvent, useState } from 'react'
+import { Skeleton } from '../../components/Skeleton'
+import { Text } from '../../components/Text'
 
 export function PostsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -17,6 +19,7 @@ export function PostsPage() {
   const { data, error, isLoading } = useFetch<PostsResponse>(
     `/search/issues?q=${query} repo:ggalli/ignite-github-blog`,
   )
+
   function handleSearchPost(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (search) {
@@ -33,36 +36,40 @@ export function PostsPage() {
     <Layout>
       <Profile />
 
-      {error && 'Falha ao carregar publicações'}
-      {isLoading && 'Loading...'}
+      {error && (
+        <Text style={{ textAlign: 'center' }}>
+          Falha ao carregar publicações
+        </Text>
+      )}
+
+      <PostsSearchField onSubmit={handleSearchPost}>
+        <h2>
+          Publicações <span>{posts?.length || 0} publicações</span>
+        </h2>
+
+        <Input
+          placeholder="Buscar conteúdo"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </PostsSearchField>
+
+      {isLoading && <LoadingSkeleton />}
+
       {posts && (
-        <>
-          <PostsSearchField onSubmit={handleSearchPost}>
-            <h2>
-              Publicações <span>{posts.length} publicações</span>
-            </h2>
-
-            <Input
-              placeholder="Buscar conteúdo"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-          </PostsSearchField>
-
-          <PostsContainer>
-            {posts.length > 0
-              ? posts.map((item) => (
-                  <PostCard
-                    key={item.id}
-                    title={item.title}
-                    text={removeSpecialChars(item.body)}
-                    number={item.number}
-                    createdAt={item.created_at}
-                  />
-                ))
-              : 'Nenhuma publicação encontrada'}
-          </PostsContainer>
-        </>
+        <PostsContainer>
+          {posts.length > 0
+            ? posts.map((item) => (
+                <PostCard
+                  key={item.id}
+                  title={item.title}
+                  text={removeSpecialChars(item.body)}
+                  number={item.number}
+                  createdAt={item.created_at}
+                />
+              ))
+            : 'Nenhuma publicação encontrada'}
+        </PostsContainer>
       )}
     </Layout>
   )
@@ -71,4 +78,15 @@ export function PostsPage() {
 function removeSpecialChars(string: string) {
   const regex = /[@#$%&*{}|]/g
   return string.replace(regex, '')
+}
+
+function LoadingSkeleton() {
+  return (
+    <PostsContainer>
+      <Skeleton style={{ width: 416, height: 260 }} />
+      <Skeleton style={{ width: 416, height: 260 }} />
+      <Skeleton style={{ width: 416, height: 260 }} />
+      <Skeleton style={{ width: 416, height: 260 }} />
+    </PostsContainer>
+  )
 }
