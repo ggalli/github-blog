@@ -13,6 +13,7 @@ import { UserGroup } from '../icons/UserGroup'
 import { Link } from '../Link'
 import { ArrowUpRightSquare } from '../icons/ArrowUpRightSquare'
 import { useFetch } from '../../hooks/use-fetch'
+import { Skeleton } from '../Skeleton'
 
 interface UserResponse {
   name: string
@@ -28,12 +29,31 @@ interface UserResponse {
 export function Profile() {
   const { data, error, isLoading } = useFetch<UserResponse>('/users/ggalli')
 
-  if (error) {
-    return <ProfileCard>Falha ao carregar usuário</ProfileCard>
+  if (isLoading) {
+    return (
+      <ProfileCard>
+        <Skeleton style={{ width: 148, height: 148 }} />
+
+        <ProfileContent>
+          <ProfileTitle>
+            <Skeleton style={{ width: 300, height: 28, marginBottom: 16 }} />
+          </ProfileTitle>
+
+          <Skeleton style={{ marginBottom: 8 }} />
+          <Skeleton style={{ width: '80%' }} />
+
+          <ProfileInfo>
+            <Skeleton style={{ width: 100 }} />
+            <Skeleton style={{ width: 100 }} />
+            <Skeleton style={{ width: 100 }} />
+          </ProfileInfo>
+        </ProfileContent>
+      </ProfileCard>
+    )
   }
 
-  if (isLoading) {
-    return <ProfileCard style={{ height: 212 }}>Loading...</ProfileCard>
+  if (error) {
+    return <ProfileCard>Falha ao carregar usuário.</ProfileCard>
   }
 
   return (

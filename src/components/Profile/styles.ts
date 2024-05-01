@@ -10,6 +10,7 @@ export const ProfileCard = styled.div`
 
   position: relative;
   top: -88px;
+  min-height: 212px;
 `
 
 export const Avatar = styled.img`
